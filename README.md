@@ -4,9 +4,17 @@ Kindly be aware that the API in use is an Azure FHIR API, and for the purposes o
 
 This simple `smart-on-fhir application` essentially calculates the occurrence count of specified `Conditions` within a chosen `year`.
 
-## Project setup
+## Project setup and compilation
 
-Retrieve the application by downloading it. Once you're in the root directory, generate a file named `.env` and insert your `token` in the format `VITE_TOKEN="add-token-here"`. Afterward, execute the application by running either of the following:
+Download the repository. 
+
+``` git clone https://github.com/gosh-dre/ucl-fhir-hack.git ```
+
+Make sure you have `npm`, `Vue.js`, and Node.js v4 installed. If you don't have them yet installed, we recommend using [`nvm`](https://github.com/creationix/nvm) and [`Vue.js`](https://vuejs.org/).
+
+Once you're in the root directory, create a file named `.env` and insert your `token` in the format ``` VITE_TOKEN="add-token-here" ```. 
+
+Afterward, execute the application by running either of the following:
 
 ```
 # yarn
@@ -15,11 +23,6 @@ yarn
 # npm
 npm install
 
-# pnpm
-pnpm install
-
-# pnpm
-bun install
 ```
 
 ### Compiles and hot-reloads for development
@@ -36,3 +39,6 @@ To compile and hot-reload on a specified port (example 8006), run
 ```bash
 npm run dev -- --port 8006
 ``` 
+
+##
+**Please Note** The `token` will be issued to you before the Hackathon.
