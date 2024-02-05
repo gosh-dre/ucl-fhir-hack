@@ -71,12 +71,7 @@ We are yet to register the GOSH FHIR API with Apple for developers. Hence, the H
 ##
 ### What we have not covered are 
 
-* [Timeline](#timeline)
-* [Tracks](#tracks)
-* [Prizes](#prizes)
-* [Judging parameters](#judging-parameters)
 * [How to submit your projects](#how-to-submit-your-projects)
-* [Rules and code of conduct](#rules-and-code-of-conduct)
 * [Steps on Building mobile application on FHIR](#steps-on-building-mobile-application-on-fhir). We are yet to 
     + [Android](#android)
     + [iOS](#ios)
