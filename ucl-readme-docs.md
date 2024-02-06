@@ -66,15 +66,13 @@ After you must have created and run the docker file, go to your browser and run 
 ##
 ### Building mobile-based FHIR Application.
 
-We are yet to register the GOSH FHIR API with Apple for developers. Hence, the Hackathon will not support development of smart-on-fhir App for mobile application. However, based on the learnings on this Hack, students are adviced to develope apps using [`swift-smart`](https://docs.smarthealthit.org/Swift-SMART/) documentation. 
+We are yet to register the GOSH FHIR API with Apple for iOS / Android App developers. Hence, the Hackathon will not support development of smart-on-fhir App for mobile application. However, based on the learnings on this Hack, students are adviced to develope apps using [`swift-smart`](https://docs.smarthealthit.org/Swift-SMART/) documentation. 
 
 ##
-### What we have not covered are 
+### Project submission 
 
 * [How to submit your projects](#how-to-submit-your-projects)
-* [Steps on Building mobile application on FHIR](#steps-on-building-mobile-application-on-fhir). We are yet to 
-    + [Android](#android)
-    + [iOS](#ios)
+
 
 
 
