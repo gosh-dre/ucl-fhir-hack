@@ -73,6 +73,125 @@ We are yet to register the GOSH FHIR API with Apple for iOS / Android App develo
 
 * [How to submit your projects](#how-to-submit-your-projects)
 
+##
+### Sample FHIR queries:
+<hr>
+
+We want to share sample FHIR queries to help the students better understand the process during development. This query is following [FHIR resources RESTful APIs, searching and the principles](https://fhir-ru.github.io/search.html)
 
 
+In this example we would be using the blood pressure readings for demonstration purposes. They are typically stored in a single Observation with two components, one for Systolic and another for Diastolic as shown below:
+```
+{
+    "resourceType": "Observation",
+    "id": "9fff022b-7f8c-468c-b9bc-fa913a5d83a3",
+    "meta": {
+        "versionId": "1",
+        "lastUpdated": "2024-01-28T12:47:07.338+00:00"
+    },
+    "status": "final",
+    "category": [
+        {
+            "coding": [
+                {
+                    "system": "http://terminology.hl7.org/CodeSystem/observation-category",
+                    "code": "vital-signs",
+                    "display": "vital-signs"
+                }
+            ]
+        }
+    ],
+    "code": {
+        "coding": [
+            {
+                "system": "http://loinc.org",
+                "code": "55284-4",
+                "display": "Blood Pressure"
+            }
+        ],
+        "text": "Blood Pressure"
+    },
+    "effectiveDateTime": "2016-05-08T13:00:00+01:00",
+    "issued": "2016-05-08T13:00:00+01:00",
+    "component": [
+        {
+            "code": {
+                "coding": [
+                    {
+                        "system": "http://loinc.org",
+                        "code": "8462-4",
+                        "display": "Diastolic Blood Pressure"
+                    }
+                ],
+                "text": "Diastolic Blood Pressure"
+            },
+            "valueQuantity": {
+                "value": 89,
+                "unit": "mm[Hg]",
+                "system": "http://unitsofmeasure.org",
+                "code": "mm[Hg]"
+            }
+        },
+        {
+            "code": {
+                "coding": [
+                    {
+                        "system": "http://loinc.org",
+                        "code": "8480-6",
+                        "display": "Systolic Blood Pressure"
+                    }
+                ],
+                "text": "Systolic Blood Pressure"
+            },
+            "valueQuantity": {
+                "value": 135,
+                "unit": "mm[Hg]",
+                "system": "http://unitsofmeasure.org",
+                "code": "mm[Hg]"
+            }
+        }
+    ]
+}
+```
+<hr>
 
+1. So this is the example FHIR query;
+
+```
+GET https://gosh-synth-fhir.azurehealthcareapis.com/Observation?code=55284-4&component-code-value-quantity=8462-4$gt20&_count=5
+```
+-  **Pay attention to this query**. Here we are asking the API for Observations with a Loinc Code of 55284-4 — “Blood Pressure.”
+Also, we’re insisting that the component list contains both a “Diastolic Blood Pressure” value AND a quantity value over 20. 
+
+- Finally, we paged it with `_count=5` (asking the API to return the first 5 pages). 
+
+- What made this query possible is the `composite search parameter`, `$`. However, the essence of the paging with `_count=5` is to avoid errors such as 
+```{
+    "resourceType": "OperationOutcome",
+    "id": "dc808062714e7f5da5451bb1428da898",
+    "meta": {
+        "lastUpdated": "2024-02-07T10:11:15.7622307+00:00"
+    },
+    "issue": [
+        {
+            "severity": "error",
+            "code": "invalid",
+            "diagnostics": "Sub-queries in a chained expression cannot return more than 1000 results, please use a more selective criteria."
+        }
+    ]
+}
+```
+
+When you see errors like this especially when you are implementing `chained expressions`, please, try to check your query and implement pagination.
+
+**Please Note:** Other examples of `chained expressions` are `...patient.birthdate=ge2011-01-01&patient.birthdate=lt2011-04-01...` 
+
+2. The second query is a typical query we used in the [example setup](https://github.com/gosh-dre/ucl-fhir-hack)
+
+```GET https://gosh-synth-fhir.azurehealthcareapis.com/Condition?onset-date=2012&code=65363002&_summary=count``` 
+
+Here, we are asking the FHIR API for ` Otitis media` conditions recorded in 2012. Meanwhile, this is how it looks like in code 
+```https://gosh-synth-fhir.azurehealthcareapis.com/Condition?onset-date=${selectedYear.value}&code=${selectedDisease.value}&_summary=count```
+
+
+<hr>
