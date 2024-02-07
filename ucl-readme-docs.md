@@ -193,5 +193,23 @@ When you see errors like this especially when you are implementing `chained expr
 Here, we are asking the FHIR API for ` Otitis media` conditions recorded in 2012. Meanwhile, this is how it looks like in code 
 ```https://gosh-synth-fhir.azurehealthcareapis.com/Condition?onset-date=${selectedYear.value}&code=${selectedDisease.value}&_summary=count```
 
+3. The third query, asks the API to return `Patients` born between `1st January, 2000` and `1st January, 2006`. 
 
+You can also flip this to mean `return Patients between the ages of 0 to 5 years`
+
+```https://gosh-synth-fhir.azurehealthcareapis.com/Patient?birthdate=ge2000-01-01&birthdate=lt2006-01-01&_summary=count```
+
+Again, let's break down this query:
+
+- `https://api-fhir.azurehealthcareapis.com/Patient` is the base URL for querying patient resources in the Azure API for FHIR.
+
+- This `birthdate=ge2000-01-01` parameter specifies that the birthdate of the patients returned should be greater than or equal to `January 1, 2000`. This filters out patients born on or after `January 1, 2000`.
+
+- This `birthdate=lt2006-01-01` parameter specifies that the birthdate of the patients returned should be less than `January 1, 2006`. This filters out patients born before `January 1, 2006`.
+
+- `_summary=count` ensures the API returns the count, `how many of these Patients` fall within this category. If you change `_summary=data`, it returns the actual dataset.
+
+**Take note of the usage of `&`**
+
+So, combining these two parameters, the query effectively retrieves patients whose birthdates fall between `January 1, 2000, and January 1, 2006`, which corresponds to patients aged 0 to 5 years.
 <hr>
